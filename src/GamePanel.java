@@ -97,20 +97,32 @@ public class GamePanel extends JPanel implements ActionListener{
         }
     }
     public void checkHit(){
-        //check if head runs into its body
-        for (int i=length; i>0;i--){
-            if (x[0]==x[i] && y[0]==y[i]){
-                running=false;
+        // Check if head runs into its body
+        for (int i = length; i > 0; i--){
+            if (x[0] == x[i] && y[0] == y[i]){
+                running = false;
             }
         }
-        //check if head runs into walls
-        if (x[0]<0 ||x[0]>WIDTH || y[0]<0||y[0]>HEIGHT){
-            running=false;
+
+        // Check if head runs into walls
+        if (x[0] < 0 || x[0] >= WIDTH || y[0] < 0 || y[0] >= HEIGHT){
+            // If the head goes out of bounds, automatically change direction to keep it within bounds
+            if (x[0] < 0) {
+                x[0] = WIDTH - UNIT_SIZE; // Teleport to the opposite side of the board
+            } else if (x[0] >= WIDTH) {
+                x[0] = 0; // Teleport to the opposite side of the board
+            } else if (y[0] < 0) {
+                y[0] = HEIGHT - UNIT_SIZE; // Teleport to the opposite side of the board
+            } else {
+                y[0] = 0; // Teleport to the opposite side of the board
+            }
         }
+
         if(!running){
             timer.stop();
         }
     }
+
     public void gameOver(Graphics graphics){
         graphics.setColor(Color.red);
         graphics.setFont(new Font("Sans serif", Font.ROMAN_BASELINE,50));
