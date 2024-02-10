@@ -19,6 +19,6 @@ If the IDE tells you that there is a problem with the JDK, click on solve automa
 
 # How to play the game :
 1. The game starts as soon as you click on run
-2. To move, press the left,right,up and down keys on your keyboard.
-3. If the snake touches himself our goes out of bound then it is GAME OVER.
+2. To move, press the left, right, up and down keys on your keyboard.
+3. If the snake touches himself then it is GAME OVER.
 4. Each time the snake eats food, the score goes up. 
