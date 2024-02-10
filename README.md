@@ -1,3 +1,7 @@
+# Presentation
+This is the good old snake game. Credits : dev_ression on ytb
+
+
 # How to import this project in IntelliJ IDE :
 
 1. In the IDE, go to `File > New > Project from Version Control`, under URL paste this repository's url (found under `<>Code > HTTPS` on github)
