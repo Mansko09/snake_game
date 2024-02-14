@@ -4,7 +4,6 @@ import java.awt.event.*;
 import java.util.Random;
 public class GamePanel extends JPanel implements ActionListener{
     private static final long serialVersionUID = 1L;
-
     static final int WIDTH = 500;
     static final int HEIGHT = 500;
     static final int UNIT_SIZE=20;
@@ -22,6 +21,7 @@ public class GamePanel extends JPanel implements ActionListener{
     boolean running = false;
     Random random;
     Timer timer;
+    JButton restart = new JButton("restart");
 
     GamePanel(){
         random=new Random();
@@ -49,6 +49,7 @@ public class GamePanel extends JPanel implements ActionListener{
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
         draw(graphics);
+
     }
 
     public void move(){
@@ -90,7 +91,7 @@ public class GamePanel extends JPanel implements ActionListener{
             graphics.setColor(Color.white);
             graphics.setFont(new Font("Sans serif", Font.ROMAN_BASELINE,25));
             FontMetrics metrics = getFontMetrics(graphics.getFont());
-            graphics.drawString("Score: "+foodEaten,(WIDTH - metrics.stringWidth("Scorde: "+ foodEaten))/2, graphics.getFont().getSize());
+            graphics.drawString("Score: "+foodEaten,(WIDTH - metrics.stringWidth("Score: "+ foodEaten))/2, graphics.getFont().getSize());
         }
         else {
             gameOver(graphics);
@@ -134,7 +135,12 @@ public class GamePanel extends JPanel implements ActionListener{
         metrics =getFontMetrics(graphics.getFont());
         graphics.drawString("Score: "+foodEaten,(WIDTH-metrics.stringWidth("Score: "+foodEaten))/2,graphics.getFont().getSize());
 
+        restart.setBounds(250,(HEIGHT/6),100,40);
+        restart.addActionListener(this);
+        this.add(restart);
+        restart.setFocusable(false);
     }
+
     @Override
     public void actionPerformed(ActionEvent arg0) {
         if (running){
@@ -143,7 +149,22 @@ public class GamePanel extends JPanel implements ActionListener{
             checkHit();
         }
         repaint();
-    }
+        if (arg0.getSource()==restart){
+            running = true;
+            length = 5; // Reset snake length
+            foodEaten = 0; // Reset food eaten count
+            direction = 'D'; // Reset direction
+            for (int i = 0; i < length; i++) {
+                // Reset snake position to default
+                x[i] = WIDTH / 2 - i * UNIT_SIZE;
+                y[i] = HEIGHT / 2;
+            }
+            addFood(); // Add new food
+            restart.setVisible(false); // Hide restart button after game restarts
+            timer.start();
+        }
+        }
+
     public class MyKeyAdapter extends KeyAdapter{
         @Override
         public void keyPressed(KeyEvent e){
