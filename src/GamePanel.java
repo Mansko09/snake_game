@@ -34,7 +34,6 @@ public class GamePanel extends JPanel implements ActionListener{
     public void play(){
         addFood();
         running=true;
-
         timer = new Timer(80,this);
         timer.start();
 
@@ -135,6 +134,9 @@ public class GamePanel extends JPanel implements ActionListener{
         metrics =getFontMetrics(graphics.getFont());
         graphics.drawString("Score: "+foodEaten,(WIDTH-metrics.stringWidth("Score: "+foodEaten))/2,graphics.getFont().getSize());
 
+        // Remove existing restart button
+        //this.remove(restart);
+
         restart.setBounds(250,(HEIGHT/6),100,40);
         restart.addActionListener(this);
         this.add(restart);
@@ -143,13 +145,13 @@ public class GamePanel extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        if (running){
+        if (running) {
             move();
             checkFood();
             checkHit();
         }
         repaint();
-        if (arg0.getSource()==restart){
+        if (arg0.getSource() == restart) {
             running = true;
             length = 5; // Reset snake length
             foodEaten = 0; // Reset food eaten count
@@ -159,11 +161,11 @@ public class GamePanel extends JPanel implements ActionListener{
                 x[i] = WIDTH / 2 - i * UNIT_SIZE;
                 y[i] = HEIGHT / 2;
             }
-            addFood(); // Add new food
+            play();
             restart.setVisible(false); // Hide restart button after game restarts
-            timer.start();
+
         }
-        }
+    }
 
     public class MyKeyAdapter extends KeyAdapter{
         @Override
@@ -192,10 +194,4 @@ public class GamePanel extends JPanel implements ActionListener{
             }
         }
     }
-
-
-
-
-
-
 }
