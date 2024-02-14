@@ -21,7 +21,9 @@ The Snake Game is a classic arcade-style game implemented in Java Swing, where t
 
 ## Screenshots
 
-_Insert screenshots of the game interface and gameplay here._
+![image](https://github.com/Mansko09/snake_game/assets/127218021/da86aaa9-4484-4741-a953-dfdf35e75d91)
+![image](https://github.com/Mansko09/snake_game/assets/127218021/82e9385a-a14d-4660-94b7-b811d895be6b)
+
 
 ## Dependencies
 
